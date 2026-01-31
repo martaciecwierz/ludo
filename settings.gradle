@@ -1,0 +1,4 @@
+rootProject.name = 'ludo'
+
+include 'user-service'
+include 'gameplay-service'
