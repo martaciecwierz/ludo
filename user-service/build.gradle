@@ -45,6 +45,7 @@ dependencies {
     testImplementation "org.spockframework:spock-core"
     testImplementation "org.spockframework:spock-spring"
     testImplementation "org.apache.groovy:groovy"
+    implementation 'org.liquibase:liquibase-core'
 }
 
 tasks.named('test') {
