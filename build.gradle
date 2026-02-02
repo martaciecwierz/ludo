@@ -8,7 +8,7 @@ allprojects {
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(25) // albo 17
+            languageVersion = JavaLanguageVersion.of(25)
         }
     }
 }
