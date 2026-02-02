@@ -24,4 +24,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Score> score;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 }
