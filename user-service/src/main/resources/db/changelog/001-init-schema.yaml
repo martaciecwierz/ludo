@@ -1,0 +1,132 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-create-users
+      author: marta
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: hashed_password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 002-create-gameplay
+      author: marta
+      changes:
+        - createTable:
+            tableName: gameplay
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: started_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: finished_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: 003-create-user-results
+      author: marta
+      changes:
+        - createTable:
+            tableName: user_results
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: result
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: position
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gameplay_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: user_results
+            baseColumnNames: gameplay_id
+            referencedTableName: gameplay
+            referencedColumnNames: id
+            constraintName: fk_user_result_gameplay
+
+  - changeSet:
+      id: 004-create-scores
+      author: marta
+      changes:
+        - createTable:
+            tableName: scores
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: score
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: scores
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_score_user

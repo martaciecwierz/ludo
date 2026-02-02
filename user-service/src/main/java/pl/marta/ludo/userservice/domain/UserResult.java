@@ -20,5 +20,5 @@ public class UserResult {
     private int result;
     private int position;
     @ManyToOne
-    private GameResult gameResult;
+    private Gameplay gameplay;
 }

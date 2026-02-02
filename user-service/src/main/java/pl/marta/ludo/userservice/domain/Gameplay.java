@@ -13,13 +13,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GameResult {
+public class Gameplay {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    @OneToMany(mappedBy = "gameResult", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "gameplay", cascade = CascadeType.ALL)
     private List<UserResult> userResults;
 
     @Enumerated(EnumType.STRING)
