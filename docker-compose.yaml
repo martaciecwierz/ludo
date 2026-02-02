@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  postgres-user-service:
+    image: postgres:15
+    container_name: user-service-db
+    restart: always
+    environment:
+      POSTGRES_DB: user_service
+      POSTGRES_USER: user_service
+      POSTGRES_PASSWORD: user_service
+    ports:
+      - "5432:5432"
+    volumes:
+      - user_service_data:/var/lib/postgresql/data
+
+volumes:
+  user_service_data:
