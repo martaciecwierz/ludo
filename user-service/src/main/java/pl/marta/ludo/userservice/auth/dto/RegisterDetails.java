@@ -1,4 +1,4 @@
-package pl.marta.ludo.userservice.auth;
+package pl.marta.ludo.userservice.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

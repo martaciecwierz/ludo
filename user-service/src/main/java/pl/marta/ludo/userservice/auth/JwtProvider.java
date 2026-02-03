@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,8 @@ import pl.marta.ludo.userservice.domain.User;
 import pl.marta.ludo.userservice.repository.UserRepository;
 
 import javax.crypto.SecretKey;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class JwtProvider {
 
     private final SecretKey key;
     private final long jwtExpirationMs;
+    @Getter
     private final long refreshExpirationMs;
     private final UserRepository userRepository;
 
@@ -46,14 +50,11 @@ public class JwtProvider {
                 .compact();
     }
 
-    public String generateRefreshToken(User user) {
-        return Jwts.builder()
-                .subject(user.getUsername())
-                .claim("type", "refresh_token")
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + refreshExpirationMs))
-                .signWith(key)
-                .compact();
+    public String generateRefreshToken() {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] randomBytes = new byte[32];
+        secureRandom.nextBytes(randomBytes);
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
     }
 
     public boolean validateToken(String token) {
@@ -81,10 +82,6 @@ public class JwtProvider {
         return parseClaims(token).getSubject();
     }
 
-    public boolean isRefreshToken(String refreshToken) {
-        return parseClaims(refreshToken).get("type").equals("refresh_token");
-    }
-
     private Claims parseClaims(String token) {
         return Jwts.parser()
                 .verifyWith(key)
@@ -92,4 +89,5 @@ public class JwtProvider {
                 .parseSignedClaims(token)
                 .getPayload();
     }
+
 }
