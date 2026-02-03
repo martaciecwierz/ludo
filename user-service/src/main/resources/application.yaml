@@ -19,4 +19,9 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
+jwt:
+  secret: secret
+  expiration-ms: 3600000
+  refresh-expiration-ms: 86400000
+
 

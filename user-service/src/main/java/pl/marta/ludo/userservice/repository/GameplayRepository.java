@@ -7,5 +7,5 @@ import pl.marta.ludo.userservice.domain.Gameplay;
 import java.util.UUID;
 
 @Repository
-public interface GameplayRepository extends JpaRepository<UUID, Gameplay> {
+public interface GameplayRepository extends JpaRepository<Gameplay, UUID> {
 }

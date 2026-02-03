@@ -7,5 +7,5 @@ import pl.marta.ludo.userservice.domain.Score;
 import java.util.UUID;
 
 @Repository
-public interface ScoreRepository extends JpaRepository<UUID, Score> {
+public interface ScoreRepository extends JpaRepository<Score, UUID> {
 }

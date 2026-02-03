@@ -7,5 +7,5 @@ import pl.marta.ludo.userservice.domain.UserResult;
 import java.util.UUID;
 
 @Repository
-public interface UserResultRepository extends JpaRepository<UUID, UserResult> {
+public interface UserResultRepository extends JpaRepository<UserResult, UUID> {
 }
