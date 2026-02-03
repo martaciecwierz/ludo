@@ -3,3 +3,5 @@ databaseChangeLog:
       file: changelog/001-int-schema.yaml
   - include:
       file: changelog/002-add_role.yaml
+  - include:
+      file: changelog/003-add_refreshtoken.yaml
